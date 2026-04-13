@@ -1,18 +1,29 @@
+"use client";
 import { Plus } from "lucide-react";
-import friendsData from "./data/friends.json";
+import { useData } from "./context/DataContext";
 import FriendCard from "./components/FriendCard";
 
 export default function Home() {
-  const totalFriends = friendsData.length;
-  const onTrackCount = friendsData.filter(f => f.status === "on-track").length;
-  const needAttentionCount = friendsData.filter(f => f.status === "overdue" || f.status === "almost due").length;
-  const interactionsCount = 12; 
+  const { friends, interactions } = useData();
+
+  // Dynamic Stats calculations
+  const totalFriends = friends.length;
+  const onTrackCount = friends.filter(f => f.status === "on-track").length;
+  const needAttentionCount = friends.filter(f => f.status === "overdue" || f.status === "almost due").length;
+  
+  // Counts interactions from the current month
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+  const interactionsThisMonth = interactions.filter(item => {
+    const itemDate = new Date(item.date);
+    return itemDate.getMonth() === currentMonth && itemDate.getFullYear() === currentYear;
+  }).length;
 
   const stats = [
     { label: "Total Friends", value: totalFriends },
     { label: "On Track", value: onTrackCount },
     { label: "Need Attention", value: needAttentionCount },
-    { label: "Interactions This Month", value: interactionsCount },
+    { label: "Interactions This Month", value: interactionsThisMonth },
   ];
 
   return (
@@ -51,7 +62,7 @@ export default function Home() {
       <section className="container mx-auto px-6 max-w-6xl">
         <h2 className="text-2xl font-bold text-[#1e293b] mb-8">Your Friends</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-           {friendsData.map((friend) => (
+           {friends.map((friend) => (
              <FriendCard key={friend.id} friend={friend} />
            ))}
         </div>

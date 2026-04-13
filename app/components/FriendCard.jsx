@@ -6,7 +6,7 @@ const FriendCard = ({ friend }) => {
 
   const statusStyles = {
     "on-track": "bg-[#244D37] text-white",
-    "almost due": "bg-[#FDBA74] text-[#92400E]",
+    "almost due": "bg-[#FDBA74] text-white",
     "overdue": "bg-[#EF4444] text-white",
   };
 
