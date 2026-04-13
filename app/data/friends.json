@@ -94,29 +94,5 @@
     "bio": "Long-time co-op partner. Even though we haven't met IRL, we talk daily.",
     "goal": 3,
     "next_due_date": "2026-04-15"
-  },
-  {
-    "id": 9,
-    "name": "Dr. Linda Wu",
-    "picture": "https://images.unsplash.com/photo-1559839734-2b71f153678e?q=80&w=400",
-    "email": "linda.wu.md@hospital.org",
-    "days_since_contact": 14,
-    "status": "almost due",
-    "tags": ["Family Friend", "Mentor"],
-    "bio": "A close friend of my parents who gave me great career advice over the years.",
-    "goal": 15,
-    "next_due_date": "2026-04-14"
-  },
-  {
-    "id": 10,
-    "name": "Ryan Gallagher",
-    "picture": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400",
-    "email": "ryan.g@startup.io",
-    "days_since_contact": 5,
-    "status": "on-track",
-    "tags": ["Startup", "Networking"],
-    "bio": "Met at a local tech mixer. Currently building an AI-powered gardening app.",
-    "goal": 21,
-    "next_due_date": "2026-04-29"
   }
 ]

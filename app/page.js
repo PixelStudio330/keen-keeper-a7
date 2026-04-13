@@ -1,65 +1,61 @@
-import Image from "next/image";
+import { Plus } from "lucide-react";
+import friendsData from "./data/friends.json";
+import FriendCard from "./components/FriendCard";
 
 export default function Home() {
+  const totalFriends = friendsData.length;
+  const onTrackCount = friendsData.filter(f => f.status === "on-track").length;
+  const needAttentionCount = friendsData.filter(f => f.status === "overdue" || f.status === "almost due").length;
+  const interactionsCount = 12; 
+
+  const stats = [
+    { label: "Total Friends", value: totalFriends },
+    { label: "On Track", value: onTrackCount },
+    { label: "Need Attention", value: needAttentionCount },
+    { label: "Interactions This Month", value: interactionsCount },
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
+    <main className="min-h-screen bg-white pb-20">
+      {/* Banner Section */}
+      <section className="pt-20 pb-12 px-6 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-[#1e293b] tracking-tight mb-4">
+            Friends to keep close in your life
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-[#64748b] text-sm md:text-base leading-relaxed mb-8 max-w-xl mx-auto">
+            Your personal shelf of meaningful connections. Browse, tend, and nurture the 
+            relationships that matter most.
           </p>
+          <button className="inline-flex items-center gap-2 bg-[#244D37] hover:bg-[#1a3a2a] text-white px-5 py-2.5 rounded-md text-sm font-medium transition-colors shadow-sm">
+            <Plus size={18} />
+            <span>Add a Friend</span>
+          </button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Summary Cards */}
+      <section className="container mx-auto px-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {stats.map((stat, index) => (
+            <div key={index} className="bg-white p-8 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] flex flex-col items-center justify-center text-center">
+              <span className="text-3xl font-bold text-[#244D37] mb-2">{stat.value}</span>
+              <span className="text-[#64748b] text-sm font-medium">{stat.label}</span>
+            </div>
+          ))}
         </div>
-      </main>
-    </div>
+        <div className="max-w-6xl mx-auto border-b border-gray-100 mt-12"></div>
+      </section>
+
+      {/* Friends Grid */}
+      <section className="container mx-auto px-6 max-w-6xl">
+        <h2 className="text-2xl font-bold text-[#1e293b] mb-8">Your Friends</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+           {friendsData.map((friend) => (
+             <FriendCard key={friend.id} friend={friend} />
+           ))}
+        </div>
+      </section>
+    </main>
   );
 }
