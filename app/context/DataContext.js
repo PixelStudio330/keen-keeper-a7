@@ -7,12 +7,18 @@ const DataContext = createContext();
 export function DataProvider({ children }) {
   const [friends, setFriends] = useState(initialFriends);
   const [interactions, setInteractions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Load from LocalStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem("keeper_interactions");
-    // Change: Fallback to [] instead of initialInteractions
     setInteractions(saved ? JSON.parse(saved) : []);
+    
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 800); 
+
+    return () => clearTimeout(timer);
   }, []);
 
   const addInteraction = (friendId, friendName, type) => {
@@ -28,7 +34,6 @@ export function DataProvider({ children }) {
       }),
     };
     
-    // Using the functional update (prev) is safer for state updates
     setInteractions((prev) => {
       const updated = [newEntry, ...prev];
       localStorage.setItem("keeper_interactions", JSON.stringify(updated));
@@ -37,7 +42,7 @@ export function DataProvider({ children }) {
   };
 
   return (
-    <DataContext.Provider value={{ friends, interactions, addInteraction }}>
+    <DataContext.Provider value={{ friends, interactions, addInteraction, loading }}>
       {children}
     </DataContext.Provider>
   );

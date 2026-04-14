@@ -4,14 +4,13 @@ import { useData } from "./context/DataContext";
 import FriendCard from "./components/FriendCard";
 
 export default function Home() {
-  const { friends, interactions } = useData();
+  const { friends, interactions, loading } = useData();
 
   // Dynamic Stats calculations
   const totalFriends = friends.length;
   const onTrackCount = friends.filter(f => f.status === "on-track").length;
   const needAttentionCount = friends.filter(f => f.status === "overdue" || f.status === "almost due").length;
   
-  // Counts interactions from the current month
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   const interactionsThisMonth = interactions.filter(item => {
@@ -49,7 +48,7 @@ export default function Home() {
       <section className="container mx-auto px-6 mb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {stats.map((stat, index) => (
-            <div key={index} className="bg-white p-8 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] flex flex-col items-center justify-center text-center">
+            <div key={index} className="bg-white p-8 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] flex flex-col items-center justify-center text-center transition-transform hover:scale-[1.02]">
               <span className="text-3xl font-bold text-[#244D37] mb-2">{stat.value}</span>
               <span className="text-[#64748b] text-sm font-medium">{stat.label}</span>
             </div>
@@ -59,13 +58,27 @@ export default function Home() {
       </section>
 
       {/* Friends Grid */}
-      <section className="container mx-auto px-6 max-w-6xl">
-        <h2 className="text-2xl font-bold text-[#1e293b] mb-8">Your Friends</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-           {friends.map((friend) => (
-             <FriendCard key={friend.id} friend={friend} />
-           ))}
+      <section className="container mx-auto px-6 max-w-6xl min-h-[400px]">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl font-bold text-[#1e293b]">Your Friends</h2>
+          {!loading && (
+            <span className="text-xs font-semibold text-gray-400 uppercase tracking-widest bg-gray-50 px-3 py-1 rounded-full animate-fade-in-smooth">
+              Archive Mode
+            </span>
+          )}
         </div>
+
+        {loading ? (
+          <div className="flex h-64 w-full items-center justify-center bg-white">
+            <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-100 border-t-[#244D37]"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in-smooth">
+             {friends.map((friend) => (
+               <FriendCard key={friend.id} friend={friend} />
+             ))}
+          </div>
+        )}
       </section>
     </main>
   );
