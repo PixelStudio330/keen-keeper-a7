@@ -49,9 +49,7 @@ export default function Timeline() {
                 className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between hover:border-gray-200 transition-colors"
               >
                 <div className="flex items-center gap-5">
-                  {/* Container updated to look more like the "card-within-card" style */}
                   <div className="w-16 h-16 flex items-center justify-center bg-white border border-gray-50 rounded-2xl shadow-sm relative overflow-hidden">
-                    {/* Image icon scaled to fill more of the box */}
                     <img 
                       src={`/assets/${item.type.toLowerCase()}.png`} 
                       alt="" 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Instagram, Facebook, Twitter } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -18,14 +17,19 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-4 mb-16">
           <span className="text-sm font-semibold uppercase tracking-widest">Social Links</span>
           <div className="flex gap-4">
-            <a href="#" className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#244D37] hover:bg-gray-200 transition-colors">
-              <Instagram size={20} />
+            {/* Instagram */}
+            <a href="#" className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors overflow-hidden">
+              <img src="/assets/instagram.png" alt="Instagram" className="w-17 h-17 object-contain" />
             </a>
-            <a href="#" className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#244D37] hover:bg-gray-200 transition-colors">
-              <Facebook size={20} fill="currentColor" />
+            
+            {/* Facebook */}
+            <a href="#" className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors overflow-hidden">
+              <img src="/assets/facebook.png" alt="Facebook" className="w-10 h-10 object-contain" />
             </a>
-            <a href="#" className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#244D37] hover:bg-gray-200 transition-colors">
-              <Twitter size={20} fill="currentColor" />
+            
+            {/* Twitter/X */}
+            <a href="#" className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors overflow-hidden">
+              <img src="/assets/twitter.png" alt="Twitter" className="w-7 h-7 object-contain" />
             </a>
           </div>
         </div>

@@ -32,8 +32,8 @@ const Navbar = () => {
               href={link.href}
               className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-all duration-200 ${
                 isActive
-                  ? "bg-[#244D37] text-white shadow-sm" // The dark green active state
-                  : "text-[#64748b] hover:bg-gray-50 hover:text-[#1e293b]" // Inactive state
+                  ? "bg-[#244D37] text-white shadow-sm" 
+                  : "text-[#64748b] hover:bg-gray-50 hover:text-[#1e293b]" 
               }`}
             >
               {link.icon}

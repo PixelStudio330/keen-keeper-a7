@@ -53,7 +53,6 @@ export default function Analytics() {
                   cornerRadius={40}
                   dataKey="value"
                   stroke="none"
-                  // ANIMATION IS BACK!
                   isAnimationActive={true} 
                   animationBegin={200}
                   animationDuration={1200}
@@ -71,7 +70,6 @@ export default function Analytics() {
                 
                 <Tooltip 
                   content={<CustomTooltip />}
-                  // Keep this FALSE so the label doesn't "slide" awkwardly
                   isAnimationActive={false} 
                   allowEscapeViewBox={{ x: true, y: true }}
                 />

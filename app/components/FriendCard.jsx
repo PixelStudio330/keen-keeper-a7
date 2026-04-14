@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 const FriendCard = ({ friend }) => {
-  // 1. Safety Check: If friend is missing, don't crash the app
   if (!friend) return null;
 
   const statusStyles = {
@@ -11,7 +10,6 @@ const FriendCard = ({ friend }) => {
   };
 
   return (
-    // 2. Ensure the ID exists before creating the link
     <Link href={`/friend/${friend.id || "#"}`}>
       <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center text-center group cursor-pointer hover:-translate-y-1 h-full">
         
